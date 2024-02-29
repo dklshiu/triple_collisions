@@ -32,30 +32,28 @@ def hash_l(rvecs, target, m):
 
 # Run tests for hashing with h random vectors against triple with dot products summing to dot sum, dividing range of dot products into steps
 def run_trials(num_trials, h, dot_sum, steps):
-   del = -1.0/steps 
+   delt = -1.0/steps 
    dot_trips = []
+
    # Make list of alpha, beta, gamma triples that we wish to test
    num_trips = 0
    for a in range(steps):
-      alpha = del * a
+      alpha = delt * a
       for b in range(steps):
-         beta = del * b
-         for c in range(steps)
-            gamma = del * c
-            if(alpha+beta+gamma<dot_sum):
-               dot_trips += [(alpha,beta,gamma)]
-               num_trips += 1
-   
+         beta = delt * b
+         gamma = dot_sum - alpha- beta
+         if(gamma<0.0 and gamma>-1.0):
+            dot_trips += [(alpha,beta,gamma)]
+            num_trips += 1
+
    # For each alpha, beta, gamma make a random triple with that configuration
    oblate_targets = []
    for trip in dot_trips:
       alpha,beta,gamma = trip
       a,b,c = rand_triple(alpha, beta, gamma)
       oblate_targets +=[(a,b,c)]
-
    # Keep count of collisions for each of our triples
-   hist_obl = [0 for j in range(len(dot_trips)] 
-
+   hist_obl = [0 for j in range(num_trips)] 
 
    for trials in range(num_trials):
       # Take h fresh random vectors
@@ -74,7 +72,7 @@ def run_trials(num_trials, h, dot_sum, steps):
    # Create a list of empirical probabilities using histrogram data
    probs=[]
    for k in range(num_trips):
-      print(f"{hist_obl[k]/num_trials*1.0}", dot_trips[k], hist_obl[k],hist_obl[k]/num_trials*1.0)
+      print(f"{hist_obl[k]/num_trials*1.0}", dot_trips[k], hist_obl[k])
       probs.append(hist_obl[k]/num_trials*1.0)
    return probs
 
