@@ -31,7 +31,7 @@ def hash_l(rvecs, target, m):
    return {dots[z] for z in smallest}
 
 # Run tests for hashing with h random vectors against triple with dot products summing to dot sum, dividing range of dot products into steps
-def run_trials(num_trials, h, dot_sum, steps):
+def run_trials(num_trials, h, m, dot_sum, steps):
    delt = -1.0/steps 
    dot_trips = []
 
@@ -62,9 +62,9 @@ def run_trials(num_trials, h, dot_sum, steps):
       # Hash our oblate triples, counting three-way collisions
       # Hashing converts data into a fixed-length string of letters and numbers
       for k in range(num_trips):
-         hash0 = hash_l(rps,oblate_targets[k][0],1)
-         hash1 = hash_l(rps,oblate_targets[k][1],1)
-         hash2 = hash_l(rps,oblate_targets[k][2],1)
+         hash0 = hash_l(rps,oblate_targets[k][0],m)
+         hash1 = hash_l(rps,oblate_targets[k][1],m)
+         hash2 = hash_l(rps,oblate_targets[k][2],m)
    # Check for collision
          if hash0==hash1==hash2:
             hist_obl[k]+=1
@@ -80,7 +80,8 @@ def run_trials(num_trials, h, dot_sum, steps):
 
 num_trials = 5000
 h = 4
+m = 1
 
 dot_sum = -1.2
 steps = 12
-p_results = run_trials(num_trials,h,dot_sum,steps)
+p_results = run_trials(num_trials,h,m,dot_sum,steps)
