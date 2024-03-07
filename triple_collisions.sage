@@ -14,6 +14,8 @@ def rand_triple(alpha,beta,gamma):
    # perform Gram Schmidt orthogonalization, inputing matrix M
    # outputs G(an array of vectors) and mu (?)
    G,mu=gram_schmidt(M)
+   for i in range(3):
+       G[i] = G[i]/G[i].norm()
    #with a special structure:
    beta = alpha*gamma + sqrt(1-alpha^2)*(beta-alpha*gamma)/(sqrt(1-alpha^2))
    lam = sqrt(gamma^2 + ((beta-alpha*gamma)^2)/(1-alpha^2))
